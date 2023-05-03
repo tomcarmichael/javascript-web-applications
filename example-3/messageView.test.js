@@ -8,11 +8,11 @@ const MessageView = require('./messageView');
 describe('MessageView', () => {
   beforeEach(() => {
     document.body.innerHTML = fs.readFileSync('./index.html');
-    // const view = new MessageView();
 
   })
   it('displays a message when user clicks the button', () => {
-    // document.body.innerHTML = fs.readFileSync('./index.html');
+    const inputBox = document.querySelector('#message-input');
+    inputBox.value = "hello, is there anybody out there?"
 
     const view = new MessageView();
 
@@ -20,11 +20,11 @@ describe('MessageView', () => {
     buttonEl.click();
 
     expect(document.querySelector('#message')).not.toBeNull();
+    expect(document.querySelector('#message').textContent).toEqual("hello, is there anybody out there?");
+
   });
 
   it('hides the message when user clicks the the hide message button', () => {
-    // document.body.innerHTML = fs.readFileSync('./index.html');
-
     const view = new MessageView();
 
     const showMessageButton = document.querySelector('#show-message-button');
