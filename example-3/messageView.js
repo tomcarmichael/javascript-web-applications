@@ -1,9 +1,15 @@
 class MessageView {
   constructor() {
-    this.buttonEl = document.querySelector('#show-message-button');
+    this.showMessageButton = document.querySelector('#show-message-button');
 
-    this.buttonEl.addEventListener('click', () => {
+    this.showMessageButton.addEventListener('click', () => {
        this.displayMessage();
+    });
+
+    this.hideMessageButton = document.querySelector('#hide-message-button');
+
+    this.hideMessageButton.addEventListener('click', () => {
+       this.hideMessage();
     });
   }
 
@@ -13,6 +19,11 @@ class MessageView {
     messageElement.id ='message';
     messageElement.textContent = "A message to you Rudi"
     document.querySelector('body').append(messageElement); 
+  }
+
+  hideMessage() {
+    const message = document.querySelector('#message');
+    message.remove();
   }
 }
 
