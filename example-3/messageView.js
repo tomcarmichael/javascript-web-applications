@@ -8,7 +8,11 @@ class MessageView {
   }
 
   displayMessage() {
-    console.log('Thanks for clicking me!');
+    // console.log('Thanks for clicking me!');
+    let messageElement = document.createElement('div');
+    messageElement.id ='message';
+    messageElement.textContent = "A message to you Rudi"
+    document.querySelector('body').append(messageElement); 
   }
 }
 
