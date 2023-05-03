@@ -21,5 +21,14 @@ describe('Page view', () => {
     view.addParagraph('testing.. testing.. 123');
 
     expect(document.querySelectorAll('p').length).toBe(3);
+  });
+
+  it('removes all paragraph from the document', () => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+
+    const view = new View();
+    view.removeAllParagraphs();
+
+    expect(document.querySelectorAll('p').length).toBe(0);
   })
 });

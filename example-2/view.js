@@ -10,6 +10,13 @@ class View {
     newPara.textContent = text;
     document.querySelector('body').append(newPara);
   }
+
+  removeAllParagraphs() {
+    let allParas = document.querySelectorAll('p');
+    allParas.forEach((para) => {
+      para.remove();
+    })
+  }
 }
 
 module.exports = View;
