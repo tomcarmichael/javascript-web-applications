@@ -13,4 +13,13 @@ describe('Page view', () => {
 
     expect(document.querySelectorAll('p').length).toBe(2);
   });
+
+  it('adds a paragraph to the body', () => {
+    document.body.innerHTML = fs.readFileSync('./index.html');
+
+    const view = new View();
+    view.addParagraph('testing.. testing.. 123');
+
+    expect(document.querySelectorAll('p').length).toBe(3);
+  })
 });
