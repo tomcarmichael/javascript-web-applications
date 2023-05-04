@@ -11,12 +11,17 @@ class GithubView {
 
       this.client.getRepoInfo(repoName, repoData => {
         console.log(repoData);
+        this.display(repoData);
       });
     });
   }
 
-  display() {
+  // Set the content of the #repo-name element to equal the value of the full_name property from the repo data.
+  // Set the content of the #repo-description element to equal the value of the description property from the repo data.
 
+  display(repoData) {
+    document.querySelector('#repo-name').append(repoData.full_name);
+    document.querySelector('#repo-description').append(repoData.description);
   }
 }
 
