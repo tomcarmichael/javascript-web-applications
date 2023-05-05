@@ -1,10 +1,9 @@
 const NotesModel = require('./notesModel');
 const NotesView = require('./notesView');
+const NotesClient = require('./notesClient');
 
-model = new NotesModel;
-model.addNote("Testing test 1,2 1,2")
+const client = new NotesClient();
+const model = new NotesModel();
+const view = new NotesView(model, client);
 
-view = new NotesView(model);
-view.displayNotes();
-
-console.log("Notes app is running.");
+view.displayNotesFromApi();

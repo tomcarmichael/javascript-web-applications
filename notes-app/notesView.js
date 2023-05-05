@@ -1,6 +1,7 @@
 class NotesView {
-  constructor(modelInstance) {
+  constructor(modelInstance, clientInstance) {
     this.model = modelInstance;
+    this.client = clientInstance;
     this.noteInputListener();
   }
 
@@ -29,7 +30,7 @@ class NotesView {
   }
 
   displayNotes() {
-    let notesArray = this.model.getNotes();
+    const notesArray = this.model.getNotes();
     notesArray.forEach((note) => {
       const noteElement = document.createElement('div');
       // Add the note class the HTML element
@@ -38,6 +39,13 @@ class NotesView {
       document.querySelector('body').append(noteElement);
     });
   }
-}
+
+  displayNotesFromApi() {
+    return this.client.loadNotes((notes) => {
+      this.model.setNotes(notes);
+      this.displayNotes();
+    });
+  };
+};
 
 module.exports = NotesView;

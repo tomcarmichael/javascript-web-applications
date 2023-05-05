@@ -20,4 +20,11 @@ describe('NotesModel class', () => {
     model.reset('');
     expect(model.getNotes()).toEqual([]);
   });
+
+  it('sets notes', () => {
+    const model = new NotesModel;
+    notes = ['code', 'program', 'develop']
+    model.setNotes(notes);
+    expect(model.getNotes()).toEqual(['code', 'program', 'develop']);
+  });
 });

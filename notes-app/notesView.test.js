@@ -6,6 +6,7 @@ const fs = require('fs');
 const View = require('./notesView');
 const Model = require('./notesModel');
 
+require('jest-fetch-mock').enableMocks();
 jest.mock('./notesModel.js');
 
 describe('NotesView class', () => {
@@ -63,5 +64,30 @@ describe('NotesView class', () => {
     expect(document.querySelectorAll('div.note').length).toEqual(2);
     expect(document.querySelectorAll('div.note')[0].textContent).toEqual('Natasha was here');
     expect(mockModel.addNote).toHaveBeenCalledTimes(2);
+  })
+
+  it('displays notes returned from an API call', () => {
+    const mockModel = {
+      notes: [],
+      getNotes: (() => mockModel.notes ),
+      setNotes: ((notes) => { mockModel.notes = notes } )
+    };
+
+    const mockClient = {
+      loadNotes : ((callback) => {
+        return fetch('http://localhost:3000/notes')
+          .then((response) => response.json())
+          .then((data) => callback(data));
+      })
+    };
+    const view = new View(mockModel, mockClient);
+
+    fetch.mockResponseOnce(JSON.stringify(["This note is coming from the server"]));
+
+    view.displayNotesFromApi()
+      .then(() => {
+        expect(document.querySelector('.note').textContent).toEqual('This note is coming from the server');
+      }); 
+    // 
   })
 })
